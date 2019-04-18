@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS frete
+(id INTEGER PRIMARY KEY AUTOINCREMENT, carregado INTEGER, caminhao_proprio INTEGER, caminhao_id INTEGER REFERENCES caminhao(id), motorista_id INTEGER REFERENCES motorista(id), origem_id INTEGER REFERENCES municipio(codigo_ibge), destino_id INTEGER REFERENCES municipio(codigo_ibge), data TEXT);
