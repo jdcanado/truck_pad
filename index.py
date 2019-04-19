@@ -5,7 +5,15 @@ import os
 import sqlite3
 from datetime import timedelta, date
 from sqlalchemy import and_, or_, func
-from http.server import BaseHTTPRequestHandler
+from werkzeug.contrib.fixers import ProxyFix
+
+app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app)
+api = Api(app,
+          version='0.1',
+          title='Our sample API',
+          description='This is our sample API'
+)
 
 conn = sqlite3.connect("db.apitruckpad")
 c = conn.cursor()
@@ -31,16 +39,7 @@ ins_estado = open('insert_estado.sql', 'r').read()
 a = c.fetchall()
 conn.commit()
 
-
-class handler(BaseHTTPRequestHandler):
-  def do_GET(self):
-    self.send_response(200)
-    self.send_header('Content-type', 'text/plain')
-    self.end_headers()
-    self.wfile.write(str("Hello from Python on Now 2.0!").encode())
-    return
-
-app = Flask('app')
+#app = Flask('app')
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 # Database
@@ -411,5 +410,8 @@ def hello_world():
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 #app.run(host='0.0.0.0', port=8080)
