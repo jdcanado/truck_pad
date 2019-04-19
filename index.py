@@ -5,6 +5,7 @@ import os
 import sqlite3
 from datetime import timedelta, date
 from sqlalchemy import and_, or_, func
+from http.server import BaseHTTPRequestHandler
 
 conn = sqlite3.connect("db.apitruckpad")
 c = conn.cursor()
@@ -29,6 +30,15 @@ ins_estado = open('insert_estado.sql', 'r').read()
 
 a = c.fetchall()
 conn.commit()
+
+
+class handler(BaseHTTPRequestHandler):
+  def do_GET(self):
+    self.send_response(200)
+    self.send_header('Content-type', 'text/plain')
+    self.end_headers()
+    self.wfile.write(str("Hello from Python on Now 2.0!").encode())
+    return
 
 app = Flask('app')
 
