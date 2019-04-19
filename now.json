@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "python-flask",
+  "name": "truckpad",
   "builds": [
     { "src": "**/*.py", "use": "@now/python@canary" },
     { "src": "css/**", "use": "@now/static" }
