@@ -402,4 +402,6 @@ def hello_world():
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
-app.run(host='0.0.0.0', port=8080)
+app = Flask(__name__)
+
+#app.run(host='0.0.0.0', port=8080)
