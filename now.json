@@ -1,8 +1,7 @@
 {
-  "version": 2,
-  "name": "truckpad",
-  "builds": [
-    { "src": "**/*.py", "use": "@now/python@canary" },
-    { "src": "css/**", "use": "@now/static" }
-  ]
+    "version": 2,
+    "name": "truckpad",
+    "builds": [
+        { "src": "*.py", "use": "@now/python" }
+    ]
 }
